@@ -1,0 +1,103 @@
+/* Style created by Michael Frochaux */
+/* Modified by Florian Borse */
+
+p
+{
+	color: black;
+	font-size: 1.0em;
+	font-family: Arial, Helvetica, "Times New Roman", serif;
+}
+
+li.PWM
+{
+	color: blue;
+	font-size: 0.9em;
+	font-family: Arial, "Comic Sans MS", "Times New Roman", serif;
+}
+
+p#fasta
+{
+	color: black;
+	font-size: 1.2em;
+	font-family: monospace;
+}
+
+div#top_bar
+{
+	height: 50px;
+	background-color: #FFFFFF;
+}
+div#top_bar_biss
+{
+	color: black;
+	position: absolute;
+	left: 10px;
+	top: 0px;
+	text-align: center;
+	font-size: 2.5em;
+	font-family: sans-serif;
+	background-color: #CCCCCC;
+	width: 110px;
+	height: 50px;
+}
+div#top_bar_to_runs
+{
+	color: black;
+	position: absolute;
+	left: 120px;
+	top: 0px;
+	text-align: center;
+	font-size:1.3em;
+	font-family: Arial, serif;
+	background-color: #FFFFFF;
+	width: 100px;
+	height: 50px;
+}
+div#top_bar_to_jobs
+{
+	color: black;
+	position: absolute;
+	left: 220px;
+	top: 0px;
+	text-align: center;
+	font-size:1.3em;
+	font-family: Arial, serif;
+	background-color: #FFFFFF;
+	width: 100px;
+	height: 50px;
+}
+div#top_bar_to_faq
+{
+	color: black;
+	position: absolute;
+	left: 320px;
+	top: 0px;
+	text-align: center;
+	font-size:1.3em;
+	font-family: Arial, serif;
+	background-color: #FFFFFF;
+	width: 100px;
+	height: 50px;
+}
+
+textarea
+{
+	width: 500px;
+	height: 300px;
+}
+
+fieldset#nice_filters
+{
+	width: 50%;
+	display: inline-block;
+}
+fieldset#nice_colours
+{
+	width: 50%;
+	display: inline-block;
+}
+fieldset#nice_other
+{
+	width: 50%;
+	display: inline-block;
+}
