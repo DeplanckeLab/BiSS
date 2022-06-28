@@ -10,7 +10,7 @@ This database was created by aggregating data from the [Fly Factor Survey](https
 This is the source code of our interactive website BiSS, which is available at [https://biss.epfl.ch/](https://biss.epfl.ch/)
 
 # How do we get the transcription factors ?
-We use [:computer: FIMO](https://meme.nbcr.net/meme/doc/fimo.html) to screen, and then annotate its output by adding a **binding site** column, those being found by querying our *Drosophila melanogaster* TF motif database (see above)
+We use :computer:[FIMO](https://meme.nbcr.net/meme/doc/fimo.html) to screen, and then annotate its output by adding a **binding site** column, those being found by querying our *Drosophila melanogaster* TF motif database (see above)
 
 # What sequence type can be submitted ?
 Sequences should be in FASTA format. You can input one sequence without header, and it will be named **user input**, but it has still to be in FASTA format.
