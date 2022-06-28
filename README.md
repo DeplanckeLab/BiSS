@@ -2,7 +2,7 @@
 Yeast one-hybrid screening for DNA-protein interactions
 
 # Website
-An interactive website is available at <a href="https://biss.epfl.ch/" target="_blank">https://biss.epfl.ch/</a>
+An interactive website is available at [https://biss.epfl.ch/](https://biss.epfl.ch/)
 
 # How do we get the transcription factors ?
 We first use FIMO to screen, and then modify its output by adding a binding site column, those being found by querying a database we created.
