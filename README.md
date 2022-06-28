@@ -1,11 +1,14 @@
 # BiSS
 Yeast one-hybrid screening for DNA-protein interactions
 
+# TF motif database
+The Transcription Factor database used is for Drosophila Melanogaster, it consists of a file with [PWM motifs](https://github.com/DeplanckeLab/BiSS/blob/main/db/dmel_only.meme-io), and an [annotation file](https://github.com/DeplanckeLab/BiSS/blob/main/db/annotations.tsv).
+
 # Website
 This is the source code of our interactive website BiSS, which is available at [https://biss.epfl.ch/](https://biss.epfl.ch/)
 
 # How do we get the transcription factors ?
-We first use FIMO to screen, and then annotate its output by adding a binding site column, those being found by querying a database we created.
+We first use FIMO to screen, and then annotate its output by adding a binding site column, those being found by querying a database we created using JASPAR, .
 
 # What sequence type can be submitted ?
 Sequences should be in FASTA format. You can input one sequence without header, and it will be named user input, but it has still to be in FASTA format.
