@@ -13,5 +13,4 @@ This is the source code of our interactive website BiSS, which is available at :
 We use :computer:[FIMO](https://meme.nbcr.net/meme/doc/fimo.html) to screen, and then annotate its output by adding a **binding site** column, those being found by querying our *Drosophila melanogaster* TF motif database (see above)
 
 # What sequence type can be submitted ?
-Sequences should be in FASTA format. You can input one sequence without header, and it will be named **user input**, but it has still to be in FASTA format.
-Also, to prevent misuse (see below) of this website, and overload of the server, length is limited to 10000 base pairs per sequence.
+Input sequences should be in FASTA format. You can input one sequence without header, and it will be named **user input**, but it has still to be in FASTA format
