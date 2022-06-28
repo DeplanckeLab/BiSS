@@ -2,7 +2,7 @@
 Yeast one-hybrid screening for DNA-protein interactions
 
 # TF motif database
-The Transcription Factor database used is for *Drosophila melanogaster*, it consists of a file with [:page_facing_up: PWM motifs](https://github.com/DeplanckeLab/BiSS/blob/main/db/dmel_only.meme-io), and an [:page_facing_up: annotation file](https://github.com/DeplanckeLab/BiSS/blob/main/db/annotations.tsv).
+The Transcription Factor database used is for *Drosophila melanogaster*, it consists of a file with 3900 [:page_facing_up: PWM motifs](https://github.com/DeplanckeLab/BiSS/blob/main/db/dmel_only.meme-io) annotating 838 unique Transcription Factors. A more precise annotation of these TFs can be find in this [:page_facing_up: annotation file](https://github.com/DeplanckeLab/BiSS/blob/main/db/annotations.tsv).
 
 This database was created by aggregating data from the [Fly Factor Survey](https://mccb.umassmed.edu/ffs/), [JASPAR](https://jaspar.genereg.net/search?q=&collection=CORE&tax_group=insects&tax_id=7227), [Transfac](http://gene-regulation.com/pub/databases.html#transfac), hdpi, [YeTFaSCo](http://yetfasco.ccbr.utoronto.ca/), consensus data from [SeleX](https://pubmed.ncbi.nlm.nih.gov/19231809/), data from [Elemento & Tavazoie](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2005-6-2-r18), as well as data from [Stark lab](https://starklab.org/data/index.html).
 
