@@ -16,7 +16,7 @@
 		We are using <a href="http://meme.nbcr.net/meme/fimo-intro.html" target="_blank">FIMO</a> to screen
 	</p>-->
 	<p>
-		<a href="http://<?php echo $LAB_ADDRESS; ?>/new_here.php">New here ? Please read this.</a>
+		<a href="new_here.php">New here ? Please read this.</a>
 	</p>
 	<form method="post" action="submit_job.php" enctype="multipart/form-data">
 		<p>

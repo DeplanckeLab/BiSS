@@ -27,18 +27,26 @@
 		foreach ($lines as $line)
 		{
 			$l = trim($line);
+			if ($l === '')
+			{
+				continue;
+			}
 			if ($l[0] === '>')
 			{
-				if (strcmp($l, $index) == 0)
+				$index = str_replace(' ', '_', $l);
+				if (array_key_exists($index, $seqs))
 				{
-					exit("Two fasta headers ($index) are the same ! Exiting...");
+					exit('Two fasta headers (' . escape_html($index) . ') are the same ! Exiting...');
 				}
 				
-				$index = str_replace(' ', '_', $l);
 				$seqs[$index] = '';
 			}
 			else
 			{
+				if (!array_key_exists($index, $seqs))
+				{
+					$seqs[$index] = '';
+				}
 				$seqs[$index] .= $l;
 			}
 		}
@@ -155,20 +163,22 @@
 		
 		foreach ($keys as $key)
 		{
+			$name = escape_html($key);
+
 			if (empty($seqs[$key]))
 			{
-				return "A sequence ($key) is empty !";
+				return "A sequence ($name) is empty !";
 			}
 			
 			if (!is_fasta_valid($seqs[$key]))
 			{
-				$temp = $seqs[$key];
-				return "A sequence ($key) is not in fasta format !<br/><br/>$temp";
+				$temp = escape_html($seqs[$key]);
+				return "A sequence ($name) is not in fasta format !<br/><br/>$temp";
 			}
 			
 			if (strlen($seqs[$key]) > $MAX_FASTA_LENGTH)
 			{
-				return "A sequence ($key) is longer than the maximum allowed ! ($MAX_FASTA_LENGTH)";
+				return "A sequence ($name) is longer than the maximum allowed ! ($MAX_FASTA_LENGTH)";
 			}
 		}
 		
@@ -189,8 +199,15 @@
 		$fimo_out = "$FIMO_TXT";
 		$temp_fimo = "$TEMP_FIMO_ANNOTATED";
 		$gene_db = "$DB_PATH/$GENE_ANNOTATIONS_DB";
+		$fimo_tsv = "$FIMO_TSV";
 		
-		exec("bash run_fimo.sh $id $job $path $input $output $db $r1 $r2 \"$useless\" $log $fimo_out $temp_fimo $gene_db \"$opts\" > $log 2>&1 &");
+		// Every argument is escaped, so that nothing can be injected in the shell
+		$args = array($id, $job, $path, $input, $output, $db, $r1, $r2, $useless, $log, $fimo_out, $temp_fimo, $gene_db, $opts, $fimo_tsv);
+		$script = escapeshellarg("$BASE_ADDRESS/run_fimo.sh");
+		$args = implode(' ', array_map('escapeshellarg', $args));
+		$log = escapeshellarg($log);
+
+		exec("bash $script $args > $log 2>&1 &");
 	}
 	
 	function fimo_postsetup($id, $job)
@@ -252,16 +269,15 @@
 		include('variables.php');
 		$path = "$UPDIR_PATH/$id/$FIMO_FOLDER";
 
+		if (!file_exists("$path/$job/$FIMO_TXT"))
+		{
+			return array("Error: Output for job $job not found !", '');
+		}
 		$content = file_get_contents("$path/$job/$FIMO_TXT");
 		
-		// For some reason, PHP seems to think it is convenient to
-		// add a newline at the end of a file if there isn't...
-		// Thanks for the bugs, PHP !
-		$lastpos = strlen($content) - 1;
-		if ($content[$lastpos] == "\n")
-		{
-			$content[$lastpos] = '';
-		}
+		// Removing the trailing newline (if any), so that
+		// split_into_matrix doesn't yield an empty last line
+		$content = rtrim($content, "\n");
 		
 		return array('', $content);
 	}

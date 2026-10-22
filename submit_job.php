@@ -16,7 +16,7 @@
 	<?php
 		// First we get the sequence from the POST data (either in the
 		// text box (id='sequence') or in the file input (id='fasta')
-		list($raw, $upname) = get_sequence($_POST['sequence'], $_FILES['fasta']);
+		list($raw, $upname) = get_sequence($_POST['sequence'] ?? '', $_FILES['fasta'] ?? array());
 		_test(pre_check_input($raw));
 		// Getting input as FASTA
 		$seqs = format_sequence_into_sequences($raw);
@@ -28,11 +28,11 @@
 		launch_fimo(session_id(), $job, '');
 	?>
 	<script type="text/javascript">
-		window.location = 'http://<?php echo $LAB_ADDRESS; ?>/view_jobs.php';
+		window.location = 'view_jobs.php';
 	</script>
 	<p>
 		Redirecting to the
-		<a href="http://<?php echo $LAB_ADDRESS; ?>/view_jobs.php">jobs view</a>...
+		<a href="view_jobs.php">jobs view</a>...
 	</p>
 </body>
 </html>

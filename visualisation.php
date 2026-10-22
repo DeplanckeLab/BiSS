@@ -20,10 +20,10 @@
 	This page in particular cannot yield good content with javascript disabled !
 	</noscript>
 	<?php
-trigger_error("test", E_USER_WARNING);
 		// Getting $job and $status
 		$params = _test2(get_GET_parameters(array('job')));
 		$job = $params['job'];
+		_test(check_job_name($job));
 		// Getting the sequences
 		$raw_input = _test2(fimo_get_input(session_id(), $job));
 		$input = format_sequence_into_sequences($raw_input);
@@ -74,7 +74,8 @@ trigger_error("test", E_USER_WARNING);
 		<?php
 			foreach ($input_keys as $key)
 			{
-				echo "<option value=\"$key\">$key</option>";
+				$name = escape_html($key);
+				echo "<option value=\"$name\">$name</option>";
 			}
 		?>
 		</select><br/><br/>
@@ -92,23 +93,21 @@ trigger_error("test", E_USER_WARNING);
 			}
 			foreach ($tfs as $tf)
 			{
-				echo "<option value=\"$tf\">$tf</option>";
+				$name = escape_html($tf);
+				echo "<option value=\"$name\">$name</option>";
 			}
 		?>
 		</select><br/><br/>
 	<button onclick="get_raw_view()">Raw output</button>
 	</fieldset>
 	<?php
-		function cmp($a, $b)
-		{
-			return ($data[$a][6] < $data[$b][6])? -1 : 1;
-		}
 		$matches = get_matches($input_keys, $data);
 		// We display content (some is hidden) for the user
 		// and for us to process through javascript.
 		foreach ($input_keys as $key)
 		{
-			usort($matches[key], cmp);
+			// Sorting by p-value (best first)
+			usort($matches[$key], function($a, $b) use ($data) { return (float) $data[$a][6] <=> (float) $data[$b][6]; });
 			$n_matched = sizeof($matches[$key]);
 			$patterns = array();
 			$starts = array();
@@ -130,27 +129,28 @@ trigger_error("test", E_USER_WARNING);
 				$sequences[] = $data[$matches[$key][$i]][8];
 			}
 
-			echo "<p id=\"p_$key\">\n$key:\n";
+			$name = escape_html($key);
+			echo "<p id=\"p_$name\">\n$name:\n";
 			echo "<div hidden=\"true\">\n";
-			echo "<div id=\"input_$key\">" . $input[$key] . "</div>\n";
-			echo "<div id=\"patterns_$key\">" . implode($patterns, ',') . "</div>\n";
-			echo "<div id=\"starts_$key\">" . implode($starts, ',') . "</div>\n";
-			echo "<div id=\"stops_$key\">" . implode($stops, ',') . "</div>\n";
-			echo "<div id=\"strands_$key\">" . implode($strands, ',') . "</div>\n";
-			echo "<div id=\"scores_$key\">" . implode($scores, ',') . "</div>\n";
-			echo "<div id=\"p-values_$key\">" . implode($pvalues, ',') . "</div>\n";
-			echo "<div id=\"q-values_$key\">" . implode($qvalues, ',') . "</div>\n";
-			echo "<div id=\"sequences_$key\">" . implode($sequences, ',') . "</div>\n";
+			echo "<div id=\"input_$name\">" . escape_html($input[$key]) . "</div>\n";
+			echo "<div id=\"patterns_$name\">" . escape_html(implode(',', $patterns)) . "</div>\n";
+			echo "<div id=\"starts_$name\">" . escape_html(implode(',', $starts)) . "</div>\n";
+			echo "<div id=\"stops_$name\">" . escape_html(implode(',', $stops)) . "</div>\n";
+			echo "<div id=\"strands_$name\">" . escape_html(implode(',', $strands)) . "</div>\n";
+			echo "<div id=\"scores_$name\">" . escape_html(implode(',', $scores)) . "</div>\n";
+			echo "<div id=\"p-values_$name\">" . escape_html(implode(',', $pvalues)) . "</div>\n";
+			echo "<div id=\"q-values_$name\">" . escape_html(implode(',', $qvalues)) . "</div>\n";
+			echo "<div id=\"sequences_$name\">" . escape_html(implode(',', $sequences)) . "</div>\n";
 			echo "</div>\n";
-			echo '<canvas id="canvas_' . $key . '"' . "></canvas>\n";
-			echo "<fieldset id=\"output_$key\">transcription factor:<br/>sequence:<br/>p-value:</fieldset>\n";
+			echo '<canvas id="canvas_' . $name . '"' . "></canvas>\n";
+			echo "<fieldset id=\"output_$name\">transcription factor:<br/>sequence:<br/>p-value:</fieldset>\n";
 			echo "</p>\n";
 		}
 	?>
 	<script type="text/javascript">
 		var g_job = "<?php echo $job; ?>";
 		var g_n_entries = <?php echo sizeof($input);?>;
-		var g_entries = ["<?php echo implode('", "', $input_keys);?>"];
+		var g_entries = <?php echo json_encode(array_values($input_keys), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);?>;
 		var g_sequence_lengths = [];
 		var g_sequence_units = [];
 		var g_rects = [];
@@ -740,7 +740,7 @@ trigger_error("test", E_USER_WARNING);
 		}
 		function get_raw_view()
 		{
-			window.location = "http://<?php echo $LAB_ADDRESS; ?>/view_output.php?job=" + g_job;
+			window.location = "view_output.php?job=" + g_job;
 		}
 	</script>
 </body>

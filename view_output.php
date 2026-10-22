@@ -23,11 +23,12 @@
 		// Getting $job and $status
 		$params = _test2(get_GET_parameters(array('job')));
 		$job = $params['job'];
+		_test(check_job_name($job));
 		// Getting actual content
 		$raw = _test2(fimo_get_raw_output(session_id(), $job));
 		// Formatting output for display
 		// Note: $raw[0] = '#', so we eliminate it
-		$raw[0] = '';
+		$raw = substr($raw, 1);
 		$output = split_into_matrix($raw);
 		$titles = $output[0];
 		$data = array_slice($output, 1);
@@ -74,7 +75,7 @@
 	<table id="output_table">
 	<tr><th>
 	<?php
-		echo implode('</th><th>', $titles);
+		echo implode('</th><th>', array_map('escape_html', $titles));
 	?>
 	</th></tr>
 	<?php
@@ -84,7 +85,7 @@
 			echo "<tr id=\"$i\">";
 			foreach ($line as $el)
 			{
-				echo "<td>$el</td>";
+				echo '<td>' . escape_html($el) . '</td>';
 			}
 			echo '</tr>';
 			$i++;
@@ -431,12 +432,12 @@
 		
 		function back_to_jobs_button_onclick()
 		{
-			window.location = "<?php echo "http://$LAB_ADDRESS/view_jobs.php"; ?>";
+			window.location = "view_jobs.php";
 		}
 		
 		function nice_view_button_onclick()
 		{
-			window.location = "<?php echo "http://$LAB_ADDRESS/visualisation.php?job=$job"; ?>";
+			window.location = "visualisation.php?job=<?php echo $job; ?>";
 		}
 	</script>
 </body>

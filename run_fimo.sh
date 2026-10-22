@@ -14,6 +14,10 @@ FIMO_OUTPUT_="${11}"
 TEMP_FIMO_ANNOTATED_="${12}"
 GENE_ANNOTATIONS_DB_="${13}"
 OPTS_="${14}"
+FIMO_TSV_="${15:-fimo.tsv}"
+
+SCRIPT_DIR_="$(cd "$(dirname "$0")" && pwd)"
+FIMO_BIN_="${FIMO_BIN:-/opt/meme/bin/fimo}"
 
 if [ -z "$ID_" ]
 then
@@ -56,30 +60,39 @@ then
 	exit 1
 fi
 
+# Marks the job as failed (unless it was deleted in the meantime)
+fail()
+{
+	echo "Error: $1"
+	if [ -f "$OUTPUT_.status" ]
+	then
+		echo 'Error' > "$OUTPUT_.status"
+	fi
+	chmod "$UPFILES_RIGHTS_" "$LOG_"
+	exit 1
+}
+
 echo 'Running' > "$OUTPUT_.status"
-chmod $UPFILES_RIGHTS_ $OUTPUT_.status
+chmod "$UPFILES_RIGHTS_" "$OUTPUT_.status"
 # First we perform fimo
-/opt/meme/bin/fimo $OPTS_ --o $OUTPUT_ $DB_ $INPUT_
+"$FIMO_BIN_" $OPTS_ --o "$OUTPUT_" "$DB_" "$INPUT_" || fail 'FIMO failed !'
 
 # Then we set the permissions right
-chmod $UPDIR_RIGHTS_ $OUTPUT_
-FIMO_FILES=`ls $OUTPUT_`
-for file in $FIMO_FILES
+chmod "$UPDIR_RIGHTS_" "$OUTPUT_"
+for file in $(ls "$OUTPUT_")
 do
-	TO_DELETE=`echo $FIMO_USELESS_ | grep $file`
-	if [ -n "$TO_DELETE" ]
-	then
-		rm "$OUTPUT_/$file"
-	else
-		chmod $UPFILES_RIGHTS_ "$OUTPUT_/$file"
-	fi
+	case " $FIMO_USELESS_ " in
+		*" $file "*) rm "$OUTPUT_/$file" ;;
+		*) chmod "$UPFILES_RIGHTS_" "$OUTPUT_/$file" ;;
+	esac
 done
-chmod $UPFILES_RIGHTS_ $LOG_
+chmod "$UPFILES_RIGHTS_" "$LOG_"
 
 # Finally, we annotate the fimo output
-python annotate.py "$OUTPUT_/$FIMO_OUTPUT_" "$GENE_ANNOTATIONS_DB_" "$OUTPUT_/$TEMP_FIMO_ANNOTATED_"
-chmod $UPFILES_RIGHTS_ "$OUTPUT_/$TEMP_FIMO_ANNOTATED_"
+python3 "$SCRIPT_DIR_/annotate.py" "$OUTPUT_/$FIMO_TSV_" "$GENE_ANNOTATIONS_DB_" "$OUTPUT_/$TEMP_FIMO_ANNOTATED_" || fail 'Annotation of the FIMO output failed !'
+chmod "$UPFILES_RIGHTS_" "$OUTPUT_/$TEMP_FIMO_ANNOTATED_"
 mv "$OUTPUT_/$TEMP_FIMO_ANNOTATED_" "$OUTPUT_/$FIMO_OUTPUT_"
+rm -f "$OUTPUT_/$FIMO_TSV_"
 
 # Indicating that the job is finished
 # It may happen that the job was deleted

@@ -1,0 +1,17 @@
+# Only the web application goes into the web root
+# (docker/ is needed by the Dockerfile, which removes it from the web root)
+.git
+.gitignore
+.dockerignore
+.env
+Dockerfile
+docker-compose*.yml
+README.md
+LICENSE
+
+# Database build helpers and unused files (not needed at runtime)
+db/proto
+db/*.rb
+db/*.original
+db/taipale.2013.meme
+db/gene_annotations.tsv

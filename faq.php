@@ -17,12 +17,17 @@
 	</p>-->
 	<p>
 		<b>How do we get the transcription factors ?</b><br/>
-		We first use <a href="http://meme.nbcr.net/meme/fimo-intro.html" target="_blank">FIMO</a> to screen, and then modify its output by adding a <b>binding site</b> column, those being found by querying a database we created.
+		We first use <a href="https://meme-suite.org/meme/doc/fimo.html" target="_blank">FIMO</a> to screen, and then modify its output by adding a <b>binding site</b> column, those being found by querying a database we created.
 	</p>
 	<p>
 		<b>What sequence type can I submit ?</b><br/>
 		Sequences should be in FASTA format. You can input one sequence without header, and it will be named <b>user input</b>, but it has still to be in FASTA format.<br/>
 		Also, to prevent misuse (see below) of this website, and overload of the server, length is limited to 10000 base pairs per sequence.
+	</p>
+	<p>
+		<b>How long are my runs kept ?</b><br/>
+		Your runs can only be seen from the browser you submitted them with, until you close it.
+		They are automatically deleted from our server after <?php echo $RETENTION_DAYS; ?> days without any new submission.
 	</p>
 </body>
 </html>

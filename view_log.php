@@ -17,9 +17,10 @@
 		// Getting $job and $status
 		$params = _test2(get_GET_parameters(array('job')));
 		$job = $params['job'];
+		_test(check_job_name($job));
 		// Getting actual content
 		$raw = _test2(fimo_get_log(session_id(), $job));
-		$nice = implode('<br/>', explode("\n", $raw));
+		$nice = implode('<br/>', explode("\n", escape_html($raw)));
 		echo $nice;
 	?>
 </body>

@@ -17,6 +17,7 @@
 		// Getting $job and $status
 		$params = _test2(get_GET_parameters(array('job')));
 		$job = $params['job'];
+		_test(check_job_name($job));
 		// Getting actual content
 		$raw = _test2(fimo_get_input(session_id(), $job));
 		$seqs = format_sequence_into_sequences($raw);
@@ -24,11 +25,11 @@
 		foreach ($keys as $key)
 		{
 			echo "<p id=\"fasta\">\n";
-			echo $key . "<br/>\n";
+			echo escape_html($key) . "<br/>\n";
 			$strs = str_split($seqs[$key], 100);
 			foreach ($strs as $str)
 			{
-				echo $str . "<br/>\n";
+				echo escape_html($str) . "<br/>\n";
 			}
 			echo "</p>\n";
 		}

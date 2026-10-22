@@ -49,7 +49,7 @@
 				echo '<td>';
 				if ($status == "Finished\n")
 				{
-					echo "<a href=\"http://$LAB_ADDRESS/visualisation.php?job=$job\">View result</a>";
+					echo "<a href=\"visualisation.php?job=$job\">View result</a>";
 				}
 				else
 				{
@@ -57,8 +57,8 @@
 				}
 				echo '</td>';
 				echo '<td>';
-				$upname = _test2(fimo_get_upname(session_id(), $job));
-				echo "<a href=\"http://$LAB_ADDRESS/view_input.php?job=$job\">$upname</a>";
+				$upname = escape_html(_test2(fimo_get_upname(session_id(), $job)));
+				echo "<a href=\"view_input.php?job=$job\">$upname</a>";
 				echo '</td>';
 				echo '<td>';
 				if ($status == "Finished\n")
@@ -81,7 +81,7 @@
 				}
 				else
 				{
-					echo "<a href=\"http://$LAB_ADDRESS/view_log.php?job=$job\">$job.log</a>";
+					echo "<a href=\"view_log.php?job=$job\">$job.log</a>";
 				}
 				echo '</td>';
 				echo '<td>';
@@ -94,12 +94,12 @@
 	<script type="text/javascript">
 		function delete_job(job)
 		{
-			window.location = "<?php echo "http://$LAB_ADDRESS/delete_job.php?job=";?>" + job;
+			window.location = "delete_job.php?job=" + job;
 		}
 		
 /*		function on_back_to_submit()
 		{
-			window.location = "<?php echo "http://$LAB_ADDRESS/submit_page.php";?>";
+			window.location = "submit_page.php";
 		}*/
 	</script>
 </body>

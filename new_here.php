@@ -13,11 +13,11 @@
 		the output. This tutorial is done so that you can follow the different steps by
 		yourself, so make sure to keep it open in another window or tab.
 		For any additional question, please read the
-		<a href="http://<?php echo $LAB_ADDRESS; ?>/faq.php">FAQ</a>.
+		<a href="faq.php">FAQ</a>.
 	</p>
 	<p>
 		Let us first explain the page you just arrived on. Start by downloading
-		<a href="http://<?php echo $LAB_ADDRESS; ?>/Salm_muscle_enhancer_46786.fasta">this file</a> (if your browser displays it instead of downloading it, right-click on the
+		<a href="Salm_muscle_enhancer_46786.fasta">this file</a> (if your browser displays it instead of downloading it, right-click on the
 		link and select the appropriate option). As you can see it is a simple file
 		containing a sequence in FASTA format. All files or sequences you want to process
 		have to be in this format, although it is not mandatory to have a header. The
@@ -25,7 +25,7 @@
 		came from ; as you see it is divided into three input fields : one in which you
 		can insert some text (in red), another where you can select a file (in blue), and
 		finally a button (in green).<br/>
-		<img src="http://<?php echo $LAB_ADDRESS; ?>/images/submit_page_screenshot.png" alt="Couldn't find the screenshot !"><br/>
+		<img src="images/submit_page_screenshot.png" alt="Couldn't find the screenshot !"><br/>
 		From here on, you have the choice to either copy and paste the sequence, or to
 		directly upload the file.
 		Then, click on the <b>Send</b> button.
@@ -36,13 +36,13 @@
 		Every time you submit sequences, a job ID is assigned to them,
 		which you can see under the <b>Job</b> section (yours is going to be
 		different, since it is assigned randomly).<br/>
-		<img src="http://<?php echo $LAB_ADDRESS; ?>/images/running_screenshot.png" alt="Couldn't find the screenshot !"><br/>
+		<img src="images/running_screenshot.png" alt="Couldn't find the screenshot !"><br/>
 		You just launched the run, so you should see a <em>Running...</em> under the
 		<b>Status</b> field. For now, you can only check the input you
 		submited, so wait a few seconds and
 		refresh the page using your navigator's way to do it (usually pressing your <b>F5</b>
 		key works).<br/>
-		<img src="http://<?php echo $LAB_ADDRESS; ?>/images/finished_screenshot.png" alt="Couldn't find the screenshot !"><br/>
+		<img src="images/finished_screenshot.png" alt="Couldn't find the screenshot !"><br/>
 		This is how it should look now, if our tool has finished processing the input. As
 		you can see, two new possibilities are offered to you : you can now get access to the
 		log of your entry. Unless something went wrong (which should not be the case), do
@@ -56,16 +56,16 @@
 		possible ; you only would need to click on <b>Submit a run</b> on the top of the
 		page. Also, you can come back anytime to the page directly without submitting
 		another run by clicking on <b>View runs</b> anytime. Also, please be aware that
-		all your runs are regularily deleted (see <a href="http://<?php echo $LAB_ADDRESS; ?>/faq.php">FAQ</a>).
+		all your runs are regularily deleted (see <a href="faq.php">FAQ</a>).
 	</p>
 	<p>
 		Clicking on <b>View result</b> leads you to the visualisation page. The first thing
 		you see are the visualisation options.<br/>
-		<img src="http://<?php echo $LAB_ADDRESS; ?>/images/options_screenshot.png" alt="Couldn't find the screenshot !"><br/>
+		<img src="images/options_screenshot.png" alt="Couldn't find the screenshot !"><br/>
 		We will not lose too much time on this section for now ; please for now select
 		<em>p-value</em> in the <b>Colours</b> section. This will change the
 		visualisation below by colouring the output, and it should now look like the picture below.<br/>
-		<img src="http://<?php echo $LAB_ADDRESS; ?>/images/output_screenshot.png" alt="Couldn't find the screenshot !"><br/>
+		<img src="images/output_screenshot.png" alt="Couldn't find the screenshot !"><br/>
 		As you can see, you have the name of the sequence (<em>Salm_muscle_enhancer_46786</em>),
 		then a strand in black in the middle, the positive strand being the above part,
 		and the part below being the negative strand. By selecting a colouring according

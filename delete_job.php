@@ -17,6 +17,7 @@
 		// Getting $job
 		$params = _test2(get_GET_parameters(array('job')));
 		$job = $params['job'];
+		_test(check_job_name($job));
 		// Getting all $jobs, to check if $job inside
 		$jobs = _test2(get_jobs(session_id()));
 		if (in_array($job, $jobs) === FALSE)
@@ -28,11 +29,11 @@
 	?>
 	Everythin' workin' ?
 	<script type="text/javascript">
-		window.location = 'http://<?php echo $LAB_ADDRESS; ?>/view_jobs.php';
+		window.location = 'view_jobs.php';
 	</script>
 	<p>
 		Redirecting to the
-		<a href="http://<?php echo $LAB_ADDRESS; ?>/view_jobs.php">jobs view</a>...
+		<a href="view_jobs.php">jobs view</a>...
 	</p>
 </body>
 </html>

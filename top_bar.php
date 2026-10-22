@@ -11,14 +11,14 @@
 <script language="JavaScript">
 	function top_bar_to_runs()
 	{
-		window.location = 'http://<?php echo $LAB_ADDRESS; ?>/submit_page.php';
+		window.location = 'submit_page.php';
 	}
 	function top_bar_to_jobs()
 	{
-		window.location = 'http://<?php echo $LAB_ADDRESS; ?>/view_jobs.php';
+		window.location = 'view_jobs.php';
 	}
 	function top_bar_to_faq()
 	{
-		window.location = 'http://<?php echo $LAB_ADDRESS; ?>/faq.php';
+		window.location = 'faq.php';
 	}
 </script>
